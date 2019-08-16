@@ -1,3 +1,2 @@
-// console.log('server out');
-
-const x: string = 10;
+/* tslint:disable */
+console.log('server out');
