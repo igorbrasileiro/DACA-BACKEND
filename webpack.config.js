@@ -32,7 +32,7 @@ module.exports = {
   plugins: [new CleanWebpackPlugin(), new webpack.HotModuleReplacementPlugin()],
   output: {
     path: path.resolve(process.cwd(), "dist"),
-    filename: "[name].js",
+    filename: "index.js",
     publicPath: "dist"
   }
 };
