@@ -1,0 +1,26 @@
+{
+  "name": "daca-backend",
+  "version": "1.0.0",
+  "description": "projeto para disciplina de daca@ufcg 2019",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igorbrasileiro/DACA-BACKEND.git"
+  },
+  "keywords": [
+    "daca",
+    "graphql",
+    "typescript",
+    "apollo",
+    "sequelize"
+  ],
+  "author": "ígor brasileiro, github/igorbrasileiro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/igorbrasileiro/DACA-BACKEND/issues"
+  },
+  "homepage": "https://github.com/igorbrasileiro/DACA-BACKEND#readme"
+}
