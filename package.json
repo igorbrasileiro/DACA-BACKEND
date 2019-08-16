@@ -2,9 +2,9 @@
   "name": "daca-backend",
   "version": "1.0.0",
   "description": "projeto para disciplina de daca@ufcg 2019",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start:dev": "node_modules/.bin/nodemon -V -e ts,js,json --delay 1 dist/main",
+    "start:dev": "node_modules/.bin/nodemon -V -e ts,js,json --delay 1 dist/index",
     "build:dev": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
