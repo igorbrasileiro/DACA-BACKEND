@@ -14,7 +14,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.{ts}": [
       "tslint --fix",
       "prettier --write",
       "git add"
