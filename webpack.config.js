@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const CopyPlugin = require('copy-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -28,7 +27,7 @@ module.exports = {
   },
   mode: 'development',
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.json'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [new CleanWebpackPlugin(), new webpack.HotModuleReplacementPlugin()],
   output: {
