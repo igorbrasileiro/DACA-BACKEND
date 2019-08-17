@@ -1,17 +1,10 @@
+import db from './models';
 import * as path from 'path';
-import * as Sequelize from 'sequelize';
 /* tslint:disable */
 
-let config = require('./config/config.json')['test'];
-const sequelize = new Sequelize.Sequelize({
-  ...config,
+db.sequelize.sync().then(() => {
+  // server.listen(port);
+  // // callback
+  // server.on('error', onError(server));
+  // server.on('listening', onListening(server));
 });
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('autenticado');
-  })
-  .catch(() => {
-    console.log('quebrou');
-  });
