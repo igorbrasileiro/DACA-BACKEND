@@ -1,6 +1,5 @@
 import { Product, ProductSequelize } from './Product';
 import { Sequelize } from 'sequelize';
-import { ModelsInterface } from '../interfaces/ModelsInterface';
 import { DbConnection } from '../interfaces/DbConnectionInterface';
 
 const env = process.env.NODE_ENV || 'development';
