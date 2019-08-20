@@ -29,10 +29,15 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  plugins: [new CleanWebpackPlugin(), new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/*'],
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
   output: {
     path: path.resolve(process.cwd(), 'dist'),
     filename: 'index.js',
-    publicPath: 'dist',
+    publicPath: '/dist',
   },
 };
