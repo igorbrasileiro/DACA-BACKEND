@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
-import { ModelsInterface } from './ModelsInterface';
+import { BaseModelInterface } from './BaseModelInterface';
 
-export interface DbConnection extends ModelsInterface {
+export interface DbConnection extends BaseModelInterface {
   sequelize: Sequelize.Sequelize; // caso der error pode ser aqui o problema
 }

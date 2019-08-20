@@ -1,5 +1,4 @@
 import { Model, DataTypes } from 'sequelize';
-import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export class Product extends Model {
   id: string; // id is an auto-generated UUID
