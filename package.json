@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start:dev": "node_modules/.bin/nodemon -V -e ts,js,json --delay 1 dist/index",
-    "dev": "concurrently 'npm run watch-ts' 'npm run watch-node'",
+    "dev": "concurrently \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1",
