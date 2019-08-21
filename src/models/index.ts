@@ -1,4 +1,4 @@
-import { Product, ProductSequelize } from './Product';
+import { UserSequelize, User } from './User';
 import { Sequelize } from 'sequelize';
 import { DbConnection } from '../interfaces/DbConnectionInterface';
 
@@ -20,7 +20,8 @@ if (!db) {
     config,
   );
 
-  Product.init(ProductSequelize, { sequelize, tableName: 'product' });
+  User.init(UserSequelize, { sequelize });
+  db['User'] = User;
 
   db['sequelize'] = sequelize;
 }
