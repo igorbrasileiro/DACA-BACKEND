@@ -5,7 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "start:dev": "node_modules/.bin/nodemon -V -e ts,js,json --delay 1 dist/index",
-    "build:dev": "webpack --config webpack.config.js",
+    "dev": "concurrently 'npm run watch-ts' 'npm run watch-node'",
+    "watch-node": "nodemon dist/server.js",
+    "watch-ts": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
@@ -50,6 +52,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "sequelize": "^5.15.0",
+    "sequelize-typescript": "^0.6.11",
     "sqlite3": "^4.1.0"
   },
   "devDependencies": {
@@ -57,6 +60,7 @@
     "@types/sequelize": "^4.28.4",
     "apollo-server-types": "^0.2.1",
     "clean-webpack-plugin": "^3.0.0",
+    "concurrently": "^4.1.2",
     "husky": "^3.0.3",
     "lint-staged": "^9.2.1",
     "nodemon": "^1.19.1",
