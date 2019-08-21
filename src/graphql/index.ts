@@ -2,8 +2,8 @@ import { typeDefs } from './typeDefs';
 import resolvers from './resolvers';
 
 const defaultGraphqlConfig = {
-  typeDefs,
   resolvers,
+  typeDefs,
 };
 
 export default defaultGraphqlConfig;

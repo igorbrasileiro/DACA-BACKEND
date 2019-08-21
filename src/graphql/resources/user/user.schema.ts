@@ -17,7 +17,7 @@ export const typeDefs = `
   }
 `;
 
-export const queries = `  
+export const queries = `
   user(id: Int, dni: Int): User
 `;
 

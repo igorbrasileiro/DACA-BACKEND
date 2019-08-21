@@ -10,6 +10,11 @@ export class User extends Model {
 }
 
 export const UserSequelize = {
+  dni: {
+    allowNull: false,
+    type: DataTypes.BIGINT,
+    unique: true,
+  },
   id: {
     autoIncrement: true,
     primaryKey: true,
@@ -19,15 +24,6 @@ export const UserSequelize = {
     allowNull: false,
     type: new DataTypes.STRING(128),
   },
-  dni: {
-    allowNull: false,
-    type: DataTypes.BIGINT,
-    unique: true,
-  },
-  state: {
-    allowNull: false,
-    type: new DataTypes.STRING(2),
-  },
   party: {
     allowNull: true,
     type: new DataTypes.STRING(128),
@@ -35,5 +31,9 @@ export const UserSequelize = {
   preferences: {
     allowNull: true,
     type: DataTypes.TEXT,
+  },
+  state: {
+    allowNull: false,
+    type: new DataTypes.STRING(2),
   },
 };
