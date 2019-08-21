@@ -1,13 +1,14 @@
 const defaultUserFields = `
-  dni: Float!
+  dni: Int!
   name: String!
   state: String!
-  party: String
+  party: String,
+  preferences: String,
 `;
 
 export const typeDefs = `
   type User {
-    id: ID!
+    id: Int!
     ${defaultUserFields}
   }
 
@@ -17,7 +18,7 @@ export const typeDefs = `
 `;
 
 export const queries = `  
-  user(id: ID!): User
+  user(id: Int, dni: Int): User
 `;
 
 export const mutations = `

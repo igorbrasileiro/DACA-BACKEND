@@ -3,7 +3,10 @@ import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 
 export const resolvers = {
   Query: {
-    user: (parent, { id }, { db }) => db.User.findByPk(id),
+    user: (parent, { id, dni }, { db }) =>
+      !!dni || !!id
+        ? db.User.findOne({ where: { ...(!!id ? { id } : {}), ...(!!dni ? { dni } : {}) } })
+        : {},
   },
   Mutation: {
     createUser: (parent, { input }, { db }: { db: DbConnection }) =>

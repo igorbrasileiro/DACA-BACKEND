@@ -6,13 +6,14 @@ export class User extends Model {
   dni!: Number;
   state!: String; // maybe reference
   party?: String;
+  preferences?: String;
 }
 
 export const UserSequelize = {
   id: {
     autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER,
+    type: DataTypes.BIGINT,
   },
   name: {
     allowNull: false,
@@ -20,7 +21,7 @@ export const UserSequelize = {
   },
   dni: {
     allowNull: false,
-    type: DataTypes.INTEGER,
+    type: DataTypes.BIGINT,
     unique: true,
   },
   state: {
@@ -30,5 +31,9 @@ export const UserSequelize = {
   party: {
     allowNull: true,
     type: new DataTypes.STRING(128),
+  },
+  preferences: {
+    allowNull: true,
+    type: DataTypes.TEXT,
   },
 };
