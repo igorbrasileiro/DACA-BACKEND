@@ -21,13 +21,8 @@ if (!db) {
   );
 
   Product.init(ProductSequelize, { sequelize, tableName: 'product' });
-  
-  db['Product'] = Product;
+
   db['sequelize'] = sequelize;
 }
-
-// Product.create({ name: 'Teste', price: '10' });
-
-// Product.findAll({ where: { name: 'Teste' } });
 
 export default <DbConnection>db;

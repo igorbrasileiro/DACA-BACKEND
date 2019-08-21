@@ -1,20 +1,27 @@
-import { gql } from 'apollo-server';
+import {
+  typeDefs as UserTypes,
+  queries as UserQueries,
+  mutations as UserMutations,
+} from './resources/user/user.schema';
 
-// do union with another types
-const typeDef = gql`
-  type Product {
-    id: ID!
-    name: String!
-    price: Float
-  }
+const types = `
+  ${UserTypes}
+`;
 
+const queries = `
   type Query {
-    getProduct(id: ID!): Product
-  }
-
-  type Mutation {
-    createProduct(name: String!, price: Float): Product!
+    ${UserQueries}
   }
 `;
 
-export default typeDef;
+const mutations = `
+  type Mutation {
+    ${UserMutations}
+  }
+`;
+
+export const typeDefs = `
+  ${types}
+  ${queries}
+  ${mutations}
+`;

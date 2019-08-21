@@ -1,15 +1,13 @@
 import db from './models';
-import defaultGraphqlConfig from './graphql';
-import { ApolloServer } from 'apollo-server';
+import graphqlDefinitions from './graphql';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server';
 
 db.sequelize.sync().then(() => {
   const server = new ApolloServer({
-    ...defaultGraphqlConfig,
-    context: { db }
+    schema: makeExecutableSchema(graphqlDefinitions),
+    context: { db },
   });
 
   // ADD PORTA
   server.listen().then(({ url }) => console.log(`Server ready at ${url}`));
 });
-
-
