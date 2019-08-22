@@ -9,16 +9,17 @@
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "tslint -c tslint.json 'src/**/*.ts'"
+    "lint": "tslint -t stylish -c tslint.json 'src/**/*.ts' --fix"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsc && lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "*.{ts}": [
-      "prettier --write",
+      "tsc --config tsconfig.json",
+      "npm run lint",
       "git add"
     ],
     "*.{json}": [
