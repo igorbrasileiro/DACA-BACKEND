@@ -10,9 +10,7 @@ let db = null;
 if (!db) {
   db = {};
 
-  const operatorsAliases = false;
-
-  config = Object.assign({ operatorsAliases }, config);
+  config = Object.assign({}, config);
   config['seeders-path'] = './seeders';
   config['migrations-path'] = './migrations';
 
@@ -26,7 +24,7 @@ if (!db) {
   User.init(UserSequelize, { sequelize });
   db['User'] = User;
 
-  State.init(StateSequelize, { sequelize });
+  State.init(StateSequelize, { sequelize, freezeTableName: true, timestamps: false });
   db['State'] = State;
 
   db['sequelize'] = sequelize;

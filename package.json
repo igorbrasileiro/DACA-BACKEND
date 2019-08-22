@@ -4,9 +4,9 @@
   "description": "projeto para disciplina de daca@ufcg 2019",
   "main": "dist/index.js",
   "scripts": {
-    "start:dev": "npm run migrate && npm run seed",
-    "migrate": "node node_modules/.bin/sequelize db:migrate --config \"dist/config/config.json\" --migrations-path \"dist/migrations/\"",
-    "seed": "node node_modules/.bin/sequelize db:seed --config \"dist/config/config.json\" --seeders-path \"dist/seeders/\"",
+    "start:dev": "tsc && npm run migrate && npm run seed",
+    "migrate": "sequelize db:migrate --config \"dist/config/config.json\" --migrations-path \"dist/migrations/\"",
+    "seed": "sequelize db:seed:all --config \"dist/config/config.json\" --seeders-path \"dist/seeders/\"",
     "dev": "concurrently \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w",
@@ -74,10 +74,6 @@
     "tslint-consistent-codestyle": "^1.15.1",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.5.3",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.8.0",
-    "webpack-node-externals": "^1.7.2"
+    "typescript": "^3.5.3"
   }
 }
