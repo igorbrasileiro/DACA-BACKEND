@@ -1,6 +1,7 @@
 import { UserSequelize, User } from './User';
 import { Sequelize } from 'sequelize';
 import { DbConnection } from '../interfaces/DbConnectionInterface';
+import { State, StateSequelize } from './State';
 
 const env = process.env.NODE_ENV || 'development';
 let config = require('../config/config.json')[env];
@@ -12,6 +13,8 @@ if (!db) {
   const operatorsAliases = false;
 
   config = Object.assign({ operatorsAliases }, config);
+  config['seeders-path'] = './seeders';
+  config['migrations-path'] = './migrations';
 
   const sequelize: Sequelize = new Sequelize(
     config.database,
@@ -22,6 +25,9 @@ if (!db) {
 
   User.init(UserSequelize, { sequelize });
   db['User'] = User;
+
+  State.init(StateSequelize, { sequelize });
+  db['State'] = State;
 
   db['sequelize'] = sequelize;
 }
