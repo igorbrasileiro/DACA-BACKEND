@@ -4,8 +4,10 @@
   "description": "projeto para disciplina de daca@ufcg 2019",
   "main": "dist/index.js",
   "scripts": {
-    "start:dev": "node_modules/.bin/nodemon -V -e ts,js,json --delay 1 dist/index",
-    "dev": "concurrently 'npm run watch-ts' 'npm run watch-node'",
+    "start:dev": "tsc && npm run migrate && npm run seed",
+    "migrate": "sequelize db:migrate --config \"dist/config/config.json\" --migrations-path \"dist/migrations/\"",
+    "seed": "sequelize db:seed:all --config \"dist/config/config.json\" --seeders-path \"dist/seeders/\"",
+    "dev": "concurrently \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -54,6 +56,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "sequelize": "^5.15.0",
+    "sequelize-cli": "^5.5.0",
     "sqlite3": "^4.1.0"
   },
   "devDependencies": {
@@ -72,10 +75,6 @@
     "tslint-consistent-codestyle": "^1.15.1",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.5.3",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.8.0",
-    "webpack-node-externals": "^1.7.2"
+    "typescript": "^3.5.3"
   }
 }

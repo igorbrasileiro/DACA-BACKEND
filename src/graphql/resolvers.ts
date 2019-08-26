@@ -1,12 +1,6 @@
-import { ContextReplacementPlugin } from "webpack";
+import { merge } from 'lodash';
+import { resolvers as userResolvers } from './resources/user/user.resolvers';
 
-const resolvers = {
-  Query: {
-    getProduct: (parent, {id}, { db }, info) => db.Product.findByPk(id),
-  },
-  Mutation: {
-    createProduct: (_, { name, price }, { db }, __) => db.Product.create({ name, price }),
-  }
-};
+const resolvers = merge(userResolvers);
 
 export default resolvers;

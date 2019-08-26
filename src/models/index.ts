@@ -1,6 +1,7 @@
-import { Product, ProductSequelize } from './Product';
+import { UserSequelize, User } from './User';
 import { Sequelize } from 'sequelize';
 import { DbConnection } from '../interfaces/DbConnectionInterface';
+import { State, StateSequelize } from './State';
 
 const env = process.env.NODE_ENV || 'development';
 let config = require('../config/config.json')[env];
@@ -9,9 +10,9 @@ let db = null;
 if (!db) {
   db = {};
 
-  const operatorsAliases = false;
-
-  config = Object.assign({ operatorsAliases }, config);
+  config = Object.assign({}, config);
+  config['seeders-path'] = './seeders';
+  config['migrations-path'] = './migrations';
 
   const sequelize: Sequelize = new Sequelize(
     config.database,
@@ -20,14 +21,13 @@ if (!db) {
     config,
   );
 
-  Product.init(ProductSequelize, { sequelize, tableName: 'product' });
-  
-  db['Product'] = Product;
+  User.init(UserSequelize, { sequelize });
+  db['User'] = User;
+
+  State.init(StateSequelize, { sequelize, freezeTableName: true, timestamps: false });
+  db['State'] = State;
+
   db['sequelize'] = sequelize;
 }
-
-// Product.create({ name: 'Teste', price: '10' });
-
-// Product.findAll({ where: { name: 'Teste' } });
 
 export default <DbConnection>db;
