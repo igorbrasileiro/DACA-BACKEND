@@ -4,11 +4,12 @@
   "description": "projeto para disciplina de daca@ufcg 2019",
   "main": "dist/index.js",
   "scripts": {
-    "start:dev": "tsc && npm run migrate && npm run seed",
+    "start": "npm run start:db && nodemon dist/index.js",
+    "start:db": "tsc && npm run migrate && npm run seed",
     "migrate": "sequelize db:migrate --config \"dist/config/config.json\" --migrations-path \"dist/migrations/\"",
     "seed": "sequelize db:seed:all --config \"dist/config/config.json\" --seeders-path \"dist/seeders/\"",
     "dev": "concurrently \"npm run watch-ts\" \"npm run watch-node\"",
-    "watch-node": "nodemon dist/server.js",
+    "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tslint -t stylish -c tslint.json 'src/**/*.ts' --fix"
