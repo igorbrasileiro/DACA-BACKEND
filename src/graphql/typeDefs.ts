@@ -4,19 +4,28 @@ import {
   mutations as UserMutations,
 } from './resources/user/user.schema';
 
+import {
+  typeDefs as PartyTypes,
+  queries as PartyQueries,
+  mutations as PartyMutation,
+} from './resources/party/party.schema';
+
 const types = `
   ${UserTypes}
+  ${PartyTypes}
 `;
 
 const queries = `
   type Query {
     ${UserQueries}
+    ${PartyQueries}
   }
 `;
 
 const mutations = `
   type Mutation {
     ${UserMutations}
+    ${PartyMutation}
   }
 `;
 
