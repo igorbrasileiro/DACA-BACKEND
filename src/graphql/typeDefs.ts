@@ -4,7 +4,10 @@ import {
   mutations as UserMutations,
 } from './resources/user/user.schema';
 
+import { typeDefs as StateTypes } from './resources/state/state.schema';
+
 const types = `
+  ${StateTypes}
   ${UserTypes}
 `;
 
