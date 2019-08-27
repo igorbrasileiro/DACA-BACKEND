@@ -14,5 +14,16 @@ export const PartySequelize = {
   name: {
     allowNull: false,
     type: new DataTypes.STRING(128),
+    unique: true,
+    validate: {
+      notNull: {
+        args: true,
+        msg: "Not Null Name"
+      },
+      notEmpty: {
+        args: true,
+        msg: "Not Empty Name"
+      }
+    }
   },
 };
