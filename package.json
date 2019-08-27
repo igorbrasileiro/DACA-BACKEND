@@ -21,7 +21,7 @@
   },
   "lint-staged": {
     "*.{ts}": [
-      "tsc",
+      "tsc --config tsconfig.json",
       "npm run lint",
       "git add"
     ],
