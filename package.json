@@ -4,7 +4,7 @@
   "description": "projeto para disciplina de daca@ufcg 2019",
   "main": "dist/index.js",
   "scripts": {
-    "start": "npm run start:db && nodemon dist/index.js",
+    "start": "nodemon dist/index.js",
     "start:db": "tsc && npm run migrate && npm run seed",
     "migrate": "sequelize db:migrate --config \"dist/config/config.json\" --migrations-path \"dist/migrations/\"",
     "seed": "sequelize db:seed:all --config \"dist/config/config.json\" --seeders-path \"dist/seeders/\"",
