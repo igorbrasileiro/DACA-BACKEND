@@ -1,7 +1,7 @@
 const stateInputField = 'state: String!';
 
 const defaultUserFields = `
-  dni: Int!
+  dni: String!
   name: String!
   party: String
   preferences: String
