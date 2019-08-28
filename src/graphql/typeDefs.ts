@@ -11,15 +11,23 @@ import {
 } from './resources/party/party.schema';
 import { typeDefs as StateTypes } from './resources/state/state.schema';
 
+import {
+  typeDefs as DeputeTypes,
+  queries as DeputeQueries,
+  mutation as DeputeMutations,
+} from './resources/depute/depute.schema';
+
 const types = `
   ${StateTypes}
   ${UserTypes}
+  ${DeputeTypes}
   ${PartyTypes}
 `;
 
 const queries = `
   type Query {
     ${UserQueries}
+    ${DeputeQueries}
     ${PartyQueries}
   }
 `;
@@ -27,6 +35,7 @@ const queries = `
 const mutations = `
   type Mutation {
     ${UserMutations}
+    ${DeputeMutations}
     ${PartyMutation}
   }
 `;

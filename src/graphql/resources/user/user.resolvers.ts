@@ -11,15 +11,11 @@ export const resolvers = {
       }),
   },
   Query: {
-    user: (parent, { dni, id }, { db }) =>
-      !!dni || !!id
-        ? db.sequelize.transaction((t: Transaction) =>
+    user: (parent, { dni }, { db }) =>
+      !!dni ? db.sequelize.transaction((t: Transaction) =>
             db.User.findOne(
               {
-                where: {
-                  ...(!!id ? { id } : {}),
-                  ...(!!dni ? { dni } : {}),
-                },
+                where: { dni },
               },
               {
                 transaction: t,

@@ -2,6 +2,7 @@ import { UserSequelize, User } from './User';
 import { Sequelize } from 'sequelize';
 import { DbConnection } from '../interfaces/DbConnectionInterface';
 import { State, StateSequelize } from './State';
+import { Depute, DeputeSequelize } from './Depute';
 import { Party, PartySequelize } from './Party';
 
 const env = process.env.NODE_ENV || 'development';
@@ -27,6 +28,9 @@ if (!db) {
 
   State.init(StateSequelize, { sequelize, freezeTableName: true, timestamps: false });
   db['State'] = State;
+
+  Depute.init(DeputeSequelize, { sequelize });
+  db['Depute'] = Depute;
 
   Party.init(PartySequelize, { sequelize });
   db['Party'] = Party;
