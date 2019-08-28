@@ -4,8 +4,8 @@ const defaultCommissionFields = `
 
 export const typeDefs = `
   type CommissionDeputies {
-    commission: Int!
-    depute: Int!
+    commission: String!
+    depute: String!
   }
 
   type Commission {
