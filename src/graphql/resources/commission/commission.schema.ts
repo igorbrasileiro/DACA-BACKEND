@@ -3,10 +3,15 @@ const defaultCommissionFields = `
 `;
 
 export const typeDefs = `
+  type CommissionDeputies {
+    commission: Int!
+    depute: Int!
+  }
+
   type Commission {
     id: Int!
     ${defaultCommissionFields}
-    deputies: [{id: Int!, depute: Int!, commission: Int!}]
+    deputies: [CommissionDeputies]
   }
 
   input creationCommissionType {
@@ -17,7 +22,7 @@ export const typeDefs = `
 
 export const queries = `
   commissions: [Commission]
-  comission(theme: String): Commission!
+  commission(theme: String): Commission!
 `;
 
 export const mutations = `
