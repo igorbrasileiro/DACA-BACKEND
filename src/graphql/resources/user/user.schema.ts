@@ -21,7 +21,7 @@ export const typeDefs = `
 `;
 
 export const queries = `
-  user(id: Int, dni: Int): User
+  user(dni: Int): User
 `;
 
 export const mutations = `
