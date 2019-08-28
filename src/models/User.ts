@@ -12,8 +12,11 @@ export class User extends Model {
 export const UserSequelize = {
   dni: {
     allowNull: false,
-    type: DataTypes.BIGINT,
+    type: new DataTypes.STRING(64),
     unique: true,
+    validate : {
+      is: /[0-9]*\-[0-9]*/,
+    },
   },
   id: {
     autoIncrement: true,
