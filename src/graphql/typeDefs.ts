@@ -13,14 +13,21 @@ import {
 import {
   typeDefs as CommissionTypes,
   queries as CommissionQueries,
-  mutations as CommissionMutation 
-} from './resources/commission/commission.schema'
+  mutations as CommissionMutation,
+} from './resources/commission/commission.schema';
 
 import { typeDefs as StateTypes } from './resources/state/state.schema';
+
+import {
+  typeDefs as DeputeTypes,
+  queries as DeputeQueries,
+  mutation as DeputeMutations,
+} from './resources/depute/depute.schema';
 
 const types = `
   ${StateTypes}
   ${UserTypes}
+  ${DeputeTypes}
   ${PartyTypes}
   ${CommissionTypes}
 `;
@@ -28,6 +35,7 @@ const types = `
 const queries = `
   type Query {
     ${UserQueries}
+    ${DeputeQueries}
     ${PartyQueries}
     ${CommissionQueries}
   }
@@ -36,6 +44,7 @@ const queries = `
 const mutations = `
   type Mutation {
     ${UserMutations}
+    ${DeputeMutations}
     ${PartyMutation}
     ${CommissionMutation}
   }

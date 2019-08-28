@@ -5,12 +5,11 @@ export const resolvers = {
   Mutation: {
     createCommission: (parent, { input }, { db }: { db: DbConnection }) => {
       return  db.sequelize.transaction((t: Transaction) => {
-        const deputesDni:[String]  = input.deputes.split(',')
-        delete input.deputes
-        console.log(deputesDni)
-        return (<any>db.Commission).create(input, { transaction: t })
-      })
-    }
+        const deputesDni:[String]  = input.deputes.split(',');
+        delete input.deputes;
+        return (<any>db.Commission).create(input, { transaction: t });
+      });
+    },
 
   },
   Query: {

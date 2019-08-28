@@ -16,14 +16,14 @@ export const CommissionSequelize = {
     type: new DataTypes.STRING(128),
     unique: true,
     validate: {
-      notNull: {
-        args: true,
-        msg: "Not Null Theme"
-      },
       notEmpty: {
         args: true,
-        msg: "Not Empty Theme"
-      }
-    }
+        msg: 'Not Empty Theme',
+      },
+      notNull: {
+        args: true,
+        msg: 'Not Null Theme',
+      },
+    },
   },
 };
