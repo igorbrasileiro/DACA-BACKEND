@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize';
 import { DbConnection } from '../interfaces/DbConnectionInterface';
 import { State, StateSequelize } from './State';
 import { Depute, DeputeSequelize } from './Depute';
+import { Party, PartySequelize } from './Party';
 
 const env = process.env.NODE_ENV || 'development';
 let config = require('../config/config.json')[env];
@@ -30,6 +31,9 @@ if (!db) {
 
   Depute.init(DeputeSequelize, { sequelize });
   db['Depute'] = Depute;
+
+  Party.init(PartySequelize, { sequelize });
+  db['Party'] = Party;
 
   db['sequelize'] = sequelize;
 }
