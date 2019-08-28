@@ -22,7 +22,7 @@ export const resolvers = {
           .findAll({ where: { person: deputiesDni } }, { transaction: t })
           .then((deputies: [Depute]) => {
             if (deputies.length !== deputiesDni.length) {
-              t.rollback();
+              t.rollback;
               return new Error();
             }
             for (const dni of deputiesDni) {
@@ -38,7 +38,7 @@ export const resolvers = {
   },
   Query: {
     commission: (parent, { theme }, { db }: { db: DbConnection }) =>
-      (<any>db.Depute).findOne({ where: { theme } }),
+      (<any>db.Commission).findOne({ where: { theme } }),
     commissions: (parent, _, { db }) =>
       db.sequelize.transaction((t: Transaction) =>
         db.Commission.findAll({
