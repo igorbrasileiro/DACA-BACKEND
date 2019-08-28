@@ -20,5 +20,6 @@ export const DeputeSequelize = {
   person: {
     allowNull: false,
     type: DataTypes.BIGINT,
+    unique: true,
   },
 };

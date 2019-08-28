@@ -1,6 +1,7 @@
 import { Transaction } from 'sequelize/types';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import { User } from '../../../models/User';
+import { Depute } from '../../../models/Depute';
 
 export const resolvers = {
   Depute: {
@@ -10,9 +11,9 @@ export const resolvers = {
   Mutation: {
     createDepute: (parent, { input }, { db }:{ db: DbConnection }) => {
       const { dni, createdAt } = input;
-      return db.sequelize.transaction((t: Transaction) => {
-        return (<any>db.User).findOne({ where: { dni } }).then((user: User) => {
-          if (!user || createdAt.length !== 8) {
+      return db.sequelize.transaction((t: Transaction) =>
+        (<any>db.User).findOne({ where: { dni } }).then((user: User) => {
+          if (!user || !user.party || createdAt.length !== 8) {
             return new Error(); // invalid input
           }
 
@@ -36,8 +37,8 @@ export const resolvers = {
               transaction: t,
             },
           );
-        });
-      });
+        }),
+      );
     },
   },
   Query: {
