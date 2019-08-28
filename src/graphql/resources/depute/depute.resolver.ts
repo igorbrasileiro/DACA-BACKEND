@@ -4,33 +4,33 @@ import { User } from '../../../models/User';
 
 export const resolvers = {
   Depute: {
-    // person:
+    person: (depute, _, { db }:{ db: DbConnection }) =>
+      (<any>db.User).findOne({ where: { dni: depute.get('person') } }),
   },
   Mutation: {
-    createDepute: (parent, { dni, createdAt }, { db }:{ db: DbConnection }) => {
+    createDepute: (parent, { input }, { db }:{ db: DbConnection }) => {
+      const { dni, createdAt } = input;
       return db.sequelize.transaction((t: Transaction) => {
         return (<any>db.User).findOne({ where: { dni } }).then((user: User) => {
-          if (!user) {
-            return new Error();
+          if (!user || createdAt.length !== 8) {
+            return new Error(); // invalid input
           }
-          if (createdAt.length !== 8) {
-            return new Error();
-          }
+
           const formatedCreatedAt = new Date(
               createdAt.slice(4, 8),
-              createdAt.slice(2, 4),
+              Number(createdAt.slice(2, 4)) - 1, // date month is indexed by 0
               createdAt.slice(0, 2),
             );
           const dateNow = new Date();
-          if (dateNow > formatedCreatedAt) {
-            return new Error();
+
+          if (formatedCreatedAt > dateNow) {
+            return new Error(); // invalid date
           }
 
-          // console.log('asduasdhasudha', formatedCreatedAt);
           return (<any>db.Depute).create(
             {
               createdAt: formatedCreatedAt,
-              person: user.id,
+              person: user.get('dni'),
             },
             {
               transaction: t,
@@ -41,6 +41,7 @@ export const resolvers = {
     },
   },
   Query: {
-    // depute:
+    depute: (parent, { dni }, { db }:{ db: DbConnection }) =>
+      (<any>db.Depute).findOne({ where: { person: dni } }),
   },
 };
