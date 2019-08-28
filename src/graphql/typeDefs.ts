@@ -9,8 +9,10 @@ import {
   queries as PartyQueries,
   mutations as PartyMutation,
 } from './resources/party/party.schema';
+import { typeDefs as StateTypes } from './resources/state/state.schema';
 
 const types = `
+  ${StateTypes}
   ${UserTypes}
   ${PartyTypes}
 `;

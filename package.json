@@ -16,7 +16,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "tsc -p tsconfig.json && lint-staged"
     }
   },
   "lint-staged": {

@@ -1,19 +1,22 @@
+const stateInputField = 'state: String!';
+
 const defaultUserFields = `
-  dni: Int!
+  dni: String!
   name: String!
-  state: String!
-  party: String,
-  preferences: String,
+  party: String
+  preferences: String
 `;
 
 export const typeDefs = `
   type User {
     id: Int!
+    state: State!
     ${defaultUserFields}
   }
 
   input creationUserType {
     ${defaultUserFields}
+    ${stateInputField}
   }
 `;
 
