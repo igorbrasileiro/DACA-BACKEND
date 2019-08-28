@@ -9,18 +9,27 @@ import {
   queries as PartyQueries,
   mutations as PartyMutation,
 } from './resources/party/party.schema';
+
+import {
+  typeDefs as CommissionTypes,
+  queries as CommissionQueries,
+  mutations as CommissionMutation 
+} from './resources/commission/commission.schema'
+
 import { typeDefs as StateTypes } from './resources/state/state.schema';
 
 const types = `
   ${StateTypes}
   ${UserTypes}
   ${PartyTypes}
+  ${CommissionTypes}
 `;
 
 const queries = `
   type Query {
     ${UserQueries}
     ${PartyQueries}
+    ${CommissionQueries}
   }
 `;
 
@@ -28,6 +37,7 @@ const mutations = `
   type Mutation {
     ${UserMutations}
     ${PartyMutation}
+    ${CommissionMutation}
   }
 `;
 
