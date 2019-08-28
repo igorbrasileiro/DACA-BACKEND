@@ -2,6 +2,7 @@ import { UserSequelize, User } from './User';
 import { Sequelize } from 'sequelize';
 import { DbConnection } from '../interfaces/DbConnectionInterface';
 import { State, StateSequelize } from './State';
+import { Depute, DeputeSequelize } from './Depute';
 
 const env = process.env.NODE_ENV || 'development';
 let config = require('../config/config.json')[env];
@@ -26,6 +27,9 @@ if (!db) {
 
   State.init(StateSequelize, { sequelize, freezeTableName: true, timestamps: false });
   db['State'] = State;
+
+  Depute.init(DeputeSequelize, { sequelize });
+  db['Depute'] = Depute;
 
   db['sequelize'] = sequelize;
 }
