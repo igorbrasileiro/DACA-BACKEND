@@ -24,12 +24,19 @@ import {
   mutation as DeputeMutations,
 } from './resources/depute/depute.schema';
 
+import {
+  typeDefs as LawProjectTypes,
+  queries as LawProjectQueries,
+  mutations as LawProjectMutations,
+} from './resources/lawProject/lawProject.schema';
+import { from } from 'apollo-link';
 const types = `
   ${StateTypes}
   ${UserTypes}
   ${DeputeTypes}
   ${PartyTypes}
   ${CommissionTypes}
+  ${LawProjectTypes}
 `;
 
 const queries = `
@@ -38,6 +45,7 @@ const queries = `
     ${DeputeQueries}
     ${PartyQueries}
     ${CommissionQueries}
+    ${LawProjectQueries}
   }
 `;
 
@@ -47,6 +55,7 @@ const mutations = `
     ${DeputeMutations}
     ${PartyMutation}
     ${CommissionMutation}
+    ${LawProjectMutations}
   }
 `;
 

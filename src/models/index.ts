@@ -4,6 +4,7 @@ import { DbConnection } from '../interfaces/DbConnectionInterface';
 import { State, StateSequelize } from './State';
 import { Depute, DeputeSequelize } from './Depute';
 import { Party, PartySequelize } from './Party';
+import { LawProject, LawProjectSequelize } from './LawProject';
 import { Commission, CommissionSequelize } from './Commission';
 import { CommissionDeputies, CommissionDeputiesSequelize } from './CommissionDeputies';
 
@@ -39,6 +40,9 @@ if (!db) {
 
   Commission.init(CommissionSequelize, { sequelize });
   db['Commission'] = Commission;
+
+  LawProject.init(LawProjectSequelize, { sequelize });
+  db['LawProject'] = LawProject;
 
   CommissionDeputies.init(CommissionDeputiesSequelize, { sequelize });
   db['CommissionDeputies'] = CommissionDeputies;
