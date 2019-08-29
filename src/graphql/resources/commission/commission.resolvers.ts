@@ -1,13 +1,19 @@
 import { Transaction } from 'sequelize/types';
-import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import { Depute } from '../../../models/Depute';
-import { Commission } from '../../../models/Commission';
+import { CommissionDeputies } from '../../../models/CommissionDeputies';
+import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 
 export const resolvers = {
   Commission: {
     deputies: (commission, _, { db }: { db: DbConnection }) => {
       return (<any>db.CommissionDeputies).findAll({
         where: { commission: commission.get('theme') },
+      }).then((comissionDeputies: [CommissionDeputies]) => {
+        const deputiesDNIs = [];
+        comissionDeputies.forEach(({ depute }) => {
+          deputiesDNIs.push(depute);
+        });
+        return (<any>db.Depute).findAll({ where: { person: deputiesDNIs } });
       });
     },
   },
@@ -27,8 +33,8 @@ export const resolvers = {
             }
             for (const dni of deputiesDni) {
               (<any>db.CommissionDeputies).create({
-                depute: dni,
                 commission: input.theme,
+                depute: dni,
               });
             }
             return result;
