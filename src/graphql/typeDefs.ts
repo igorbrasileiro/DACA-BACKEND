@@ -9,6 +9,13 @@ import {
   queries as PartyQueries,
   mutations as PartyMutation,
 } from './resources/party/party.schema';
+
+import {
+  typeDefs as CommissionTypes,
+  queries as CommissionQueries,
+  mutations as CommissionMutation,
+} from './resources/commission/commission.schema';
+
 import { typeDefs as StateTypes } from './resources/state/state.schema';
 
 import {
@@ -28,6 +35,7 @@ const types = `
   ${UserTypes}
   ${DeputeTypes}
   ${PartyTypes}
+  ${CommissionTypes}
   ${LawProjectTypes}
 `;
 
@@ -36,6 +44,7 @@ const queries = `
     ${UserQueries}
     ${DeputeQueries}
     ${PartyQueries}
+    ${CommissionQueries}
     ${LawProjectQueries}
   }
 `;
@@ -45,6 +54,7 @@ const mutations = `
     ${UserMutations}
     ${DeputeMutations}
     ${PartyMutation}
+    ${CommissionMutation}
     ${LawProjectMutations}
   }
 `;
