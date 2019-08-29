@@ -4,6 +4,8 @@ import { DbConnection } from '../interfaces/DbConnectionInterface';
 import { State, StateSequelize } from './State';
 import { Depute, DeputeSequelize } from './Depute';
 import { Party, PartySequelize } from './Party';
+import { Commission, CommissionSequelize } from './Commission';
+import { CommissionDeputies, CommissionDeputiesSequelize } from './CommissionDeputies';
 
 const env = process.env.NODE_ENV || 'development';
 let config = require('../config/config.json')[env];
@@ -34,6 +36,12 @@ if (!db) {
 
   Party.init(PartySequelize, { sequelize });
   db['Party'] = Party;
+
+  Commission.init(CommissionSequelize, { sequelize });
+  db['Commission'] = Commission;
+
+  CommissionDeputies.init(CommissionDeputiesSequelize, { sequelize });
+  db['CommissionDeputies'] = CommissionDeputies;
 
   db['sequelize'] = sequelize;
 }
