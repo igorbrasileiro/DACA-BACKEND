@@ -4,6 +4,7 @@ import { DbConnection } from '../interfaces/DbConnectionInterface';
 import { State, StateSequelize } from './State';
 import { Depute, DeputeSequelize } from './Depute';
 import { Party, PartySequelize } from './Party';
+import { LawProject, LawProjectSequelize } from './LawProject';
 
 const env = process.env.NODE_ENV || 'development';
 let config = require('../config/config.json')[env];
@@ -34,6 +35,9 @@ if (!db) {
 
   Party.init(PartySequelize, { sequelize });
   db['Party'] = Party;
+
+  LawProject.init(LawProjectSequelize, { sequelize });
+  db['LawProject'] = LawProject;
 
   db['sequelize'] = sequelize;
 }
