@@ -1,16 +1,20 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, BuildOptions } from 'sequelize';
 
-export class LawProject extends Model {
-  id!: Number;
-  depute!: String;
-  menu!: String;
-  code!: String;
-  conclusive!: String;
-  url!: String;
-  interest!: String;
-  situation!: String;
-  year!: String;
+export interface LawProject extends Model {
+  id: Number;
+  depute: String;
+  menu: String;
+  code: String;
+  conclusive: String;
+  url: String;
+  interest: String;
+  situation: String;
+  year: String;
 }
+
+export type LawProjectModelStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): LawProject;
+};
 
 export const LawProjectSequelize = {
   code: {

@@ -1,7 +1,7 @@
 const defaultDeputeFields = `
   createdAt: Date!
   laws: Int!
-  person: User!
+  person: Person!
 `;
 
 export const typeDefs = `

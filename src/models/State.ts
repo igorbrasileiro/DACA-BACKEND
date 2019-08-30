@@ -1,10 +1,14 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, BuildOptions } from 'sequelize';
 
-export class State extends Model {
-  id!: Number;
-  name!: String;
-  minemonic!: String;
+export interface State extends Model {
+  id: Number;
+  minemonic: String;
+  name: String;
 }
+
+export type StateModelStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): State;
+};
 
 export const StateSequelize = {
   id: {

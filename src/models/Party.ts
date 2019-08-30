@@ -1,9 +1,13 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, BuildOptions } from 'sequelize';
 
-export class Party extends Model {
-  id!: Number;
-  name!: String;
+export interface Party extends Model {
+  id: Number;
+  name: String;
 }
+
+export type PartyModelStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): Party;
+};
 
 export const PartySequelize = {
   id: {

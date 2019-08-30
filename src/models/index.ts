@@ -1,19 +1,19 @@
-import { UserSequelize, User } from './User';
+import { PersonModelStatic, PersonSequelize } from './Person';
 import { Sequelize } from 'sequelize';
 import { DbConnection } from '../interfaces/DbConnectionInterface';
-import { State, StateSequelize } from './State';
-import { Depute, DeputeSequelize } from './Depute';
-import { Party, PartySequelize } from './Party';
-import { LawProject, LawProjectSequelize } from './LawProject';
-import { Commission, CommissionSequelize } from './Commission';
-import { CommissionDeputies, CommissionDeputiesSequelize } from './CommissionDeputies';
+import { StateSequelize, StateModelStatic } from './State';
+import {  DeputeSequelize, DeputeModelStatic } from './Depute';
+import { PartySequelize, PartyModelStatic } from './Party';
+import { LawProjectSequelize, LawProjectModelStatic } from './LawProject';
+import { CommissionSequelize, CommissionModelStatic } from './Commission';
+import { CommissionDeputiesSequelize, CommissionDeputiesModelStatic } from './CommissionDeputies';
 
 const env = process.env.NODE_ENV || 'development';
 let config = require('../config/config.json')[env];
-let db = null;
+let db: DbConnection = null;
 
 if (!db) {
-  db = {};
+  db = { sequelize: null };
 
   config = Object.assign({}, config);
   config['seeders-path'] = './seeders';
@@ -26,28 +26,28 @@ if (!db) {
     config,
   );
 
-  User.init(UserSequelize, { sequelize });
-  db['User'] = User;
+  db['State'] = <StateModelStatic>sequelize.define(
+    'State',
+    StateSequelize,
+    { freezeTableName: true, timestamps: false },
+  );
 
-  State.init(StateSequelize, { sequelize, freezeTableName: true, timestamps: false });
-  db['State'] = State;
+  db['Person'] = <PersonModelStatic>sequelize.define('Person', PersonSequelize);
 
-  Depute.init(DeputeSequelize, { sequelize });
-  db['Depute'] = Depute;
+  db['Depute'] = <DeputeModelStatic>sequelize.define('Depute', DeputeSequelize);
 
-  Party.init(PartySequelize, { sequelize });
-  db['Party'] = Party;
+  db['Party'] = <PartyModelStatic>sequelize.define('Party', PartySequelize);
 
-  Commission.init(CommissionSequelize, { sequelize });
-  db['Commission'] = Commission;
+  db['Commission'] = <CommissionModelStatic>sequelize.define('Commission', CommissionSequelize);
 
-  LawProject.init(LawProjectSequelize, { sequelize });
-  db['LawProject'] = LawProject;
+  db['LawProject'] = <LawProjectModelStatic>sequelize.define('LawProject', LawProjectSequelize);
 
-  CommissionDeputies.init(CommissionDeputiesSequelize, { sequelize });
-  db['CommissionDeputies'] = CommissionDeputies;
+  db['CommissionDeputies'] = <CommissionDeputiesModelStatic>sequelize.define(
+    'CommissionDeputies',
+    CommissionDeputiesSequelize,
+  );
 
   db['sequelize'] = sequelize;
 }
 
-export default <DbConnection>db;
+export default db;

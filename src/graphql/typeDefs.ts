@@ -2,7 +2,7 @@ import {
   typeDefs as UserTypes,
   queries as UserQueries,
   mutations as UserMutations,
-} from './resources/user/user.schema';
+} from './resources/person/person.schema';
 
 import {
   typeDefs as PartyTypes,
