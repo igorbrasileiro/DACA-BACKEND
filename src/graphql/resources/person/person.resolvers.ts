@@ -3,12 +3,18 @@ import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 
 export const resolvers = {
   Mutation: {
-    createPerson: (parent, { input }, { db }: { db: DbConnection }) =>
-      db.sequelize.transaction(async (t: Transaction) =>  {
+    createPerson: (parent, { input }, { db }: { db: DbConnection }) => {
+      return db.sequelize.transaction(async (t: Transaction) =>  {
+        if (input.party) {
+          const party = db.Party.findOne({ where: input.party });
+
+          if (!party) new Error(); // no party
+        }
         const state = await db.State.findOne({ where: { minemonic: input.state } });
         input.state = state.id;
         return db.Person.create(input, { transaction: t });
-      }),
+      });
+    },
   },
   Person: {
     state: (person, args, { db } : { db: DbConnection }) =>
@@ -16,16 +22,15 @@ export const resolvers = {
   },
   Query: {
     person: (parent, { dni }, { db }) =>
-      !!dni ? db.sequelize.transaction((t: Transaction) =>
-            db.User.findOne(
-              {
-                where: { dni },
-              },
-              {
-                transaction: t,
-              },
-            ),
-          )
-        : {},
+      db.sequelize.transaction((t: Transaction) =>
+        db.User.findOne(
+          {
+            where: { dni },
+          },
+          {
+            transaction: t,
+          },
+        ),
+      ),
   },
 };
