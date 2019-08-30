@@ -1,15 +1,15 @@
-const defaultUserFields = `
+const defaultPartyFields = `
   name: String!
 `;
 
 export const typeDefs = `
   type Party {
     id: Int!
-    ${defaultUserFields}
+    ${defaultPartyFields}
   }
 
   input creationPartyType {
-    ${defaultUserFields}
+    ${defaultPartyFields}
   }
 `;
 

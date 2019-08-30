@@ -5,7 +5,7 @@ export interface Person extends Model {
   readonly dni: Number;
   name: String;
   state: String; // maybe reference
-  party: String;
+  party: Number;
   preferences?: String;
 }
 
@@ -33,7 +33,7 @@ export const PersonSequelize = {
   },
   party: {
     allowNull: true,
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.INTEGER,
   },
   preferences: {
     allowNull: true,

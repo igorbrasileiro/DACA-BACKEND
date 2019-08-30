@@ -1,7 +1,7 @@
 import {
-  typeDefs as UserTypes,
-  queries as UserQueries,
-  mutations as UserMutations,
+  typeDefs as PersonTypes,
+  queries as PersonQueries,
+  mutations as PersonMutations,
 } from './resources/person/person.schema';
 
 import {
@@ -32,7 +32,7 @@ import {
 import { from } from 'apollo-link';
 const types = `
   ${StateTypes}
-  ${UserTypes}
+  ${PersonTypes}
   ${DeputeTypes}
   ${PartyTypes}
   ${CommissionTypes}
@@ -41,7 +41,7 @@ const types = `
 
 const queries = `
   type Query {
-    ${UserQueries}
+    ${PersonQueries}
     ${DeputeQueries}
     ${PartyQueries}
     ${CommissionQueries}
@@ -51,7 +51,7 @@ const queries = `
 
 const mutations = `
   type Mutation {
-    ${UserMutations}
+    ${PersonMutations}
     ${DeputeMutations}
     ${PartyMutation}
     ${CommissionMutation}

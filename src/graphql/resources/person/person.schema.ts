@@ -3,7 +3,6 @@ const stateInputField = 'state: String!';
 const defaultPersonFields = `
   dni: String!
   name: String!
-  party: String
   preferences: String
 `;
 
@@ -11,10 +10,12 @@ export const typeDefs = `
   type Person {
     id: Int!
     state: State!
+    party: Party
     ${defaultPersonFields}
   }
 
   input creationPersonType {
+    party: String
     ${defaultPersonFields}
     ${stateInputField}
   }
