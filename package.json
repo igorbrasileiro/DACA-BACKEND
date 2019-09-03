@@ -50,6 +50,7 @@
     "apollo-server": "^2.8.1",
     "bcryptjs": "^2.4.3",
     "env": "0.0.2",
+    "express": "^4.17.1",
     "graphql": "^14.4.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
