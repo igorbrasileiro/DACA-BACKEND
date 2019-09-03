@@ -1,48 +1,43 @@
 import { Transaction } from 'sequelize/types';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
-import { User } from '../../../models/User';
-import { Depute } from '../../../models/Depute';
+import { Person } from '../../../models/Person';
 
 export const resolvers = {
   Depute: {
     person: (depute, _, { db }:{ db: DbConnection }) =>
-      (<any>db.User).findOne({ where: { dni: depute.get('person') } }),
+      db.Person.findOne({ where: { dni: depute.get('person') } }),
   },
   Mutation: {
     createDepute: (parent, { input }, { db }:{ db: DbConnection }) => {
       const { dni, createdAt } = input;
-      return db.sequelize.transaction((t: Transaction) =>
-        (<any>db.User).findOne({ where: { dni } }).then((user: User) => {
-          if (!user || !user.party || createdAt.length !== 8) {
-            return new Error(); // invalid input
-          }
+      return db.sequelize.transaction(async (t: Transaction) => {
+        const person: Person = await db.Person.findOne({ where: { dni } });
 
-          const formatedCreatedAt = new Date(
-              createdAt.slice(4, 8),
-              Number(createdAt.slice(2, 4)) - 1, // date month is indexed by 0
-              createdAt.slice(0, 2),
-            );
-          const dateNow = new Date();
+        if (!person || !person.party || createdAt.length !== 8) return new Error(); // invalid input
 
-          if (formatedCreatedAt > dateNow) {
-            return new Error(); // invalid date
-          }
+        const formatedCreatedAt = new Date(
+          createdAt.slice(4, 8),
+          Number(createdAt.slice(2, 4)) - 1, // date month is indexed by 0
+          createdAt.slice(0, 2),
+        );
+        const dateNow = new Date();
 
-          return (<any>db.Depute).create(
-            {
-              createdAt: formatedCreatedAt,
-              person: user.get('dni'),
-            },
-            {
-              transaction: t,
-            },
-          );
-        }),
-      );
+        if (formatedCreatedAt > dateNow) return new Error(); // invalid date
+
+        return db.Depute.create(
+          {
+            createdAt: formatedCreatedAt,
+            person: person.get('dni'),
+          },
+          {
+            transaction: t,
+          },
+        );
+      });
     },
   },
   Query: {
     depute: (parent, { dni }, { db }:{ db: DbConnection }) =>
-      (<any>db.Depute).findOne({ where: { person: dni } }),
+      db.Depute.findOne({ where: { person: dni } }),
   },
 };

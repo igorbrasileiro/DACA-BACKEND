@@ -5,7 +5,7 @@ export const resolvers = {
   Mutation: {
     createParty: (parent, { input }, { db }: { db: DbConnection }) =>
       db.sequelize.transaction((t: Transaction) =>
-        (<any>db.Party).create(input, { transaction: t }),
+        db.Party.create(input, { transaction: t }),
       ),
   },
   Query: {

@@ -1,29 +1,30 @@
 const stateInputField = 'state: String!';
 
-const defaultUserFields = `
+const defaultPersonFields = `
   dni: String!
   name: String!
-  party: String
   preferences: String
 `;
 
 export const typeDefs = `
-  type User {
+  type Person {
     id: Int!
     state: State!
-    ${defaultUserFields}
+    party: Party
+    ${defaultPersonFields}
   }
 
-  input creationUserType {
-    ${defaultUserFields}
+  input creationPersonType {
+    party: String
+    ${defaultPersonFields}
     ${stateInputField}
   }
 `;
 
 export const queries = `
-  user(dni: String!): User
+  person(dni: String!): Person
 `;
 
 export const mutations = `
-  createUser(input: creationUserType): User
+  createPerson(input: creationPersonType): Person
 `;

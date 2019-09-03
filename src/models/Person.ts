@@ -1,15 +1,19 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, BuildOptions } from 'sequelize';
 
-export class User extends Model {
-  id!: Number;
-  name!: String;
-  dni!: Number;
-  state!: String; // maybe reference
-  party?: String;
+export interface Person extends Model {
+  readonly id: Number;
+  readonly dni: Number;
+  name: String;
+  state: String; // maybe reference
+  party: Number;
   preferences?: String;
 }
 
-export const UserSequelize = {
+export type PersonModelStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): Person;
+};
+
+export const PersonSequelize = {
   dni: {
     allowNull: false,
     type: new DataTypes.STRING(64),
@@ -29,7 +33,7 @@ export const UserSequelize = {
   },
   party: {
     allowNull: true,
-    type: new DataTypes.STRING(128),
+    type: new DataTypes.INTEGER,
   },
   preferences: {
     allowNull: true,

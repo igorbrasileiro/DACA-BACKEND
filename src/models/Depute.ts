@@ -1,10 +1,14 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, BuildOptions } from 'sequelize';
 
-export class Depute extends Model {
-  person!: Number;
-  createdAt!: Date;
-  laws!: Number;
+export interface Depute extends Model {
+  person: Number;
+  createdAt: Date;
+  laws: Number;
 }
+
+export type DeputeModelStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): Depute;
+};
 
 export const DeputeSequelize = {
   id: {

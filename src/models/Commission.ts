@@ -1,9 +1,13 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, BuildOptions } from 'sequelize';
 
-export class Commission extends Model {
-  id!: Number;
-  theme!: String;
+export interface Commission extends Model {
+  id: Number;
+  theme: String;
 }
+
+export type CommissionModelStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): Commission;
+};
 
 export const CommissionSequelize = {
   id: {
