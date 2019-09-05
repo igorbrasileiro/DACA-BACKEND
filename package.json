@@ -48,6 +48,7 @@
   "homepage": "https://github.com/igorbrasileiro/DACA-BACKEND#readme",
   "dependencies": {
     "apollo-server": "^2.8.1",
+    "apollo-server-express": "^2.9.3",
     "bcryptjs": "^2.4.3",
     "env": "0.0.2",
     "express": "^4.17.1",

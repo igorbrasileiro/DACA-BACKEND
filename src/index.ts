@@ -1,22 +1,29 @@
 import db from './models';
 import express from 'express';
+import * as bodyParser from 'body-parser';
 import graphqlDefinitions from './graphql';
-import { ApolloServer, makeExecutableSchema } from 'apollo-server';
-import auth from './middleware/auth';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
+import auth, { getToken } from './middleware/auth';
 /* tslint:disable */
 
-const app = express();
 
 db.sequelize.sync().then(() => {
-  app.use(auth().initialize());
-
   const server = new ApolloServer({
-    context: entrada => { console.log('a'); return ({ db }); },
+    context: ({ req }) => { console.log('context', req.dni); return ({ db }); },
     schema: makeExecutableSchema(graphqlDefinitions),
   });
 
-  app.use('/', auth().authenticate);
+  const app = express();
+  server.applyMiddleware({ app });
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
+  app.use(auth().initialize());
+
+  app.use('/', auth().authenticate());
+  app.get('/', getToken);
+
 
   // ADD PORTA
-  server.listen().then(({ url }) => console.log(`Server ready at ${url}`));
+  // server.listen().then(({ url }) => console.log(`Server ready at ${url}`));
+  app.listen({ port: 4000 },  ()=> console.log('server ready'));
 });

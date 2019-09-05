@@ -10,16 +10,25 @@ const params = {
   secretOrKey: 'ALTERAR',
 };
 
+export const getToken = (req, res, next) => {
+  const payload = {
+    dni: 'dni',
+  };
+  const token = sign(payload, params.secretOrKey);
+  res.json({ token });
+}
+
 export default () => {
-  const strategy = new Strategy(params, (payload, next) => {
-    console.log('entrei');
-    return db.Person.findByPk(payload.id).then((person: Person) => {
-      return next(null, { person });
-    }).catch(console.log);
+  const strategy = new Strategy(params, (payload, done) => {
+    console.log('entrei', payload);
+    // return db.Person.findByPk(payload.id).then((person: Person) => {
+    //   return next(null, { person });
+    // }).catch(console.log);
+    return done(null, payload);
   });
   use(strategy);
   return {
-    authenticate: authenticate('jwt', { session: false }),
+    authenticate: () => authenticate('jwt', { session: false }),
     initialize: () => initialize(),
   };
 };
