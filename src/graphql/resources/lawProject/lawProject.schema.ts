@@ -15,9 +15,20 @@ export const typeDefs = `
     depute: Depute!
   }
 
+  type Result {
+    result: String
+    against: Int
+    awe: Int
+  }
+
   input creationLawProjectType {
     depute: String!
     ${defaultLawProjectFields}
+  }
+
+  input votationLawProjectType {
+    code: String!
+    status: String!
   }
 `;
 
@@ -26,5 +37,6 @@ export const queries = `
 `;
 
 export const mutations = `
-  createLawProject(input: creationLawProjectType): LawProject
+  createLawProject(input: votationLawProjectType): Result
+  voteLawProject(input: votationLawProjectType): Result
 `;
