@@ -13,6 +13,8 @@ export const typeDefs = `
     code: String!
     situation: String!
     depute: Depute!
+    currentLocal: String!
+    historic: String
   }
 
   type Result {
@@ -29,6 +31,7 @@ export const typeDefs = `
   input votationLawProjectType {
     code: String!
     status: String!
+    nextLocal: String
   }
 `;
 
@@ -37,6 +40,6 @@ export const queries = `
 `;
 
 export const mutations = `
-  createLawProject(input: votationLawProjectType): Result
+  createLawProject(input: creationLawProjectType): LawProject
   voteLawProject(input: votationLawProjectType): Result
 `;
