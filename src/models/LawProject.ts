@@ -10,6 +10,8 @@ export interface LawProject extends Model {
   interest: String;
   situation: String;
   year: String;
+  currentLocal: String;
+  historic: String;
 }
 
 export type LawProjectModelStatic = typeof Model & {
@@ -36,6 +38,10 @@ export const LawProjectSequelize = {
     allowNull: false,
     type: DataTypes.BOOLEAN,
   },
+  currentLocal: {
+    defaultValue: 'ccjc',
+    type: DataTypes.STRING,
+  },
   depute: {
     allowNull: false,
     type: new DataTypes.STRING(128),
@@ -49,6 +55,9 @@ export const LawProjectSequelize = {
         msg: 'Not Null Depute',
       },
     },
+  },
+  historic: {
+    type: DataTypes.STRING,
   },
   id: {
     autoIncrement: true,
