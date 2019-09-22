@@ -6,13 +6,10 @@ export const resolvers = {
   Mutation: {
     createPerson: (parent, { input }, { db }: { db: DbConnection }) => {
       return db.sequelize.transaction(async (t: Transaction) =>  {
-        if (input.party) {
-          const party: Party = await db.Party.findOne({ where: { name: input.party } });
-          input.party = party.id;
-
-          if (!party) return new Error(); // no party
-        }
         const state = await db.State.findOne({ where: { minemonic: input.state } });
+        if (!state) {
+          return new Error();
+        }
         input.state = state.id;
         return db.Person.create(input, { transaction: t });
       });
