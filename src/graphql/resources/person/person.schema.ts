@@ -22,7 +22,8 @@ export const typeDefs = `
 `;
 
 export const queries = `
-  person(dni: String!): Person
+  person: Person
+  token(dni: String!): String
 `;
 
 export const mutations = `

@@ -1,6 +1,6 @@
 import { Transaction } from 'sequelize/types';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
-import { Party } from '../../../models/Party';
+import { getToken } from '../../../middleware/auth';
 
 export const resolvers = {
   Mutation: {
@@ -22,7 +22,7 @@ export const resolvers = {
       db.State.findByPk(person.get('state')),
   },
   Query: {
-    person: (parent, { dni }, { db }) => {
+    person: (parent, {}, { db, dni }) => {
       return db.sequelize.transaction((t: Transaction) =>
         db.Person.findOne(
           {
@@ -33,6 +33,17 @@ export const resolvers = {
           },
         ),
       );
+    },
+    token: (parent, { dni }, { db }) => {
+      return db.sequelize.transaction(async (t: Transaction) => {
+        const token = await getToken(dni, db);
+
+        if (token) {
+          return token;
+        }
+
+        return 'Invalid dni';
+      });
     },
   },
 };
