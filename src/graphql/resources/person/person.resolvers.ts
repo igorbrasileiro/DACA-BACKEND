@@ -37,7 +37,7 @@ export const resolvers = {
           return token;
         }
 
-        return 'Invalid dni';
+        throw new Error('Invalid DNI');
       });
     },
   },
