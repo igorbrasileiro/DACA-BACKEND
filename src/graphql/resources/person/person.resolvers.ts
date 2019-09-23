@@ -1,6 +1,8 @@
 import { Transaction } from 'sequelize/types';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import { getToken } from '../../../middleware/auth';
+import { compose } from '../../composable/composable.resolver';
+import { authResolvers } from '../../composable/auth.resolver';
 
 export const resolvers = {
   Mutation: {
@@ -22,18 +24,11 @@ export const resolvers = {
       db.State.findByPk(person.get('state')),
   },
   Query: {
-    person: (parent, {}, { db, dni }) => {
+    person: compose(...authResolvers)((parent, {}, { db, dni }) => {
       return db.sequelize.transaction((t: Transaction) =>
-        db.Person.findOne(
-          {
-            where: { dni },
-          },
-          {
-            transaction: t,
-          },
-        ),
+        db.Person.findOne({ where: { dni }, transaction: t }),
       );
-    },
+    }),
     token: (parent, { dni }, { db }) => {
       return db.sequelize.transaction(async (t: Transaction) => {
         const token = await getToken(dni, db);
