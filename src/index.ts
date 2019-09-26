@@ -1,13 +1,16 @@
 import db from './models';
+import ENV from './config/environment';
 import express from 'express';
+import passport from 'passport';
+import { Strategy } from 'passport-jwt';
 import * as bodyParser from 'body-parser';
 import graphqlDefinitions from './graphql';
-import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
 import { params } from './middleware/auth';
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import passport, { authenticate, initialize, use } from 'passport';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
 /* tslint:disable */
 
+
+const port = ENV.PORT || 4000;
 
 db.sequelize.sync().then(() => {
   
@@ -42,5 +45,5 @@ db.sequelize.sync().then(() => {
 
   server.applyMiddleware({ app, cors: false });
 
-  app.listen({ port: 4000 },  ()=> console.log('server ready'));
+  app.listen({ port },  ()=> console.log('server ready at port: ', port));
 });
