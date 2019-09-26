@@ -1,17 +1,21 @@
 import { sign } from 'jsonwebtoken';
-import { compareSync } from 'bcryptjs';
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { genSaltSync, compareSync } from 'bcryptjs';
+import { ExtractJwt } from 'passport-jwt';
 import { DbConnection } from '../interfaces/DbConnectionInterface';
 
 export const params = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: 'ALTERAR',
+  secretOrKey: 'ALTERAR', // process.env.SECRET_KEY
 };
 
-export const getToken = async (dni: string, db: DbConnection) => {
-  if (dni) {
+const SALT_FACTOR = 10; // process.env.SALT_FACTOR
+export const SALT = genSaltSync(SALT_FACTOR);
+
+export const getToken = async (dni: string, password: string,  db: DbConnection) => {
+  if (dni && password) {
     const person = await db.Person.findOne({ where: { dni } });
-    if (person) {
+    if (person && compareSync(password, person.password)) {
+
       const payload = {
         dni: person.dni,
       };

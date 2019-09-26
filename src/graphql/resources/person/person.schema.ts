@@ -15,6 +15,7 @@ export const typeDefs = `
   }
 
   input creationPersonType {
+    password: String!
     party: String
     ${defaultPersonFields}
     ${stateInputField}
@@ -23,7 +24,6 @@ export const typeDefs = `
 
 export const queries = `
   person: Person
-  token(dni: String!): String
 `;
 
 export const mutations = `
