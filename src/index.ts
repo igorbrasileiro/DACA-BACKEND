@@ -26,6 +26,8 @@ db.sequelize.sync().then(() => {
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
       if (user) {
         (<any>req).dni = user.dni;
+      } else {
+        (<any>req).dni = null;
       }
 
       next();

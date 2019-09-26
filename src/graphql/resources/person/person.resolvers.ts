@@ -1,8 +1,9 @@
 import { Transaction } from 'sequelize/types';
-import { DbConnection } from '../../../interfaces/DbConnectionInterface';
-import { getToken } from '../../../middleware/auth';
+import { hashSync } from 'bcryptjs';
+import { SALT } from '../../../middleware/auth';
 import { compose } from '../../composable/composable.resolver';
 import { authResolvers } from '../../composable/auth.resolver';
+import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 
 export const resolvers = {
   Mutation: {
@@ -12,7 +13,10 @@ export const resolvers = {
         if (!state) {
           return new Error();
         }
+
         input.state = state.id;
+        input.password = hashSync(input.password, SALT);
+
         return db.Person.create(input, { transaction: t });
       });
     },
@@ -29,16 +33,5 @@ export const resolvers = {
         db.Person.findOne({ where: { dni }, transaction: t }),
       );
     }),
-    token: (parent, { dni }, { db }) => {
-      return db.sequelize.transaction(async (t: Transaction) => {
-        const token = await getToken(dni, db);
-
-        if (token) {
-          return token;
-        }
-
-        throw new Error('Invalid DNI');
-      });
-    },
   },
 };

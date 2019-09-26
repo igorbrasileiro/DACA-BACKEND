@@ -29,7 +29,11 @@ import {
   queries as LawProjectQueries,
   mutations as LawProjectMutations,
 } from './resources/lawProject/lawProject.schema';
-import { from } from 'apollo-link';
+
+import {
+  queries as TokenQueries,
+} from './resources/token/token.schema';
+
 const types = `
   ${StateTypes}
   ${PersonTypes}
@@ -46,6 +50,7 @@ const queries = `
     ${PartyQueries}
     ${CommissionQueries}
     ${LawProjectQueries}
+    ${TokenQueries}
   }
 `;
 

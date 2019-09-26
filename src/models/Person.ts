@@ -6,6 +6,7 @@ export interface Person extends Model {
   name: String;
   state: String; // maybe reference
   party: Number;
+  password?: String;
   preferences?: String;
 }
 
@@ -34,6 +35,10 @@ export const PersonSequelize = {
   party: {
     allowNull: true,
     type: new DataTypes.INTEGER,
+  },
+  password: {
+    allowNull: false,
+    type: new DataTypes.STRING(128),
   },
   preferences: {
     allowNull: true,
