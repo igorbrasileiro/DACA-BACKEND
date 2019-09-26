@@ -48,3 +48,11 @@ Descrição e especificação do [E-Camara Organizadora](https://docs.google.com
 
 [Diagrama](/Arquitetura.jpg).
 
+## Persistência
+
+Para persistir os dados está sendo usado o sqlite que é uma biblioteca desenvolvida em C que implementa um banco de dados SQL, o ORM faz o mapeamento dos dados relacionais para o javascript. Através do sequelize é definido os modelos que viram tabelas no banco e através de métodos javascript é possível  realizar as operações de CRUD, o ORM é um facilitador para criar e manipular os dados no banco.
+
+## Autenticação
+
+No sistema de autenticação estamos utilizando token jwt, juntamente com passport, que este é um middleware que tem como objetivo identificar se há token na requisição e recuperar a informação proveniente do token e colocar esta informação na requisição. No nosso sistema a informação do DNI e a senha de pessoa é utilizada para gerar o token. A geração do token consiste em verificar se uma pessoa no sistema possui o DNI requisitado e caso está pessoa exista no sistema, é checado as senhas e caso esta última verificação seja válida, um token é gerado com aquele DNI como resposta.
+
