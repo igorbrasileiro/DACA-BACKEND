@@ -1,11 +1,12 @@
 
 # DACA-BACKEND
 
-Repositório do server da uma aplicação para disciplina de DACA@UFCG
+## Descrição
+API GraphQL para um sistema que permite usuários acompanhar o processo de tramitação da criação de Leis. Para mais informações acesse [E-Camara Organizadora](https://docs.google.com/document/d/e/2PACX-1vRMP1dmmr6DpXQECabYiR_pboa4P_XiXEywRX_wntWL0ego4KHlH25_Vsv0HB0_Io4nXn4lNI0eEaXU/pub)
 
   
 ## Iniciando
-### Prerequisites
+### Pre requisitos
 O que precisa para instalar o projeto:
 * Node >= 10;
 
@@ -37,22 +38,67 @@ O script `start:db` é responsável por criar o esquema do banco de dados e popu
 O script `start` é responsável por iniciar o server que estará disponível no endereço [localHost](http://localhost:4000)
 
 ## Executando testes
-Em breve
-
-
-## Descrição do projeto
-
-Descrição e especificação do [E-Camara Organizadora](https://docs.google.com/document/d/e/2PACX-1vRMP1dmmr6DpXQECabYiR_pboa4P_XiXEywRX_wntWL0ego4KHlH25_Vsv0HB0_Io4nXn4lNI0eEaXU/pub).
+Em construção
 
 ## Diagrama da Arquitetura
 
-[Diagrama](/Arquitetura.jpg).
+Esta aplicação consiste em uma API GraphQL, que é composta por três camadas: `GraphQL`, `Serviços/Lógica de negócio` e `Repositório`.
+
+De forma simploria, a api recebe requisições na rota destinada ao GraphQL (esta rota está definida no index.ts), o próprio graphql identifica qual tipo de `query/mutation`. Após o tipo de query ou mutation for identificada, o resolver especifico é chamado. Os resolvers fazem parte da camada de lógica de negócios.
+
+[Diagrama de arquitetura](/Arquitetura.jpg).
+
+Para mais informações sobre como funciona uma API GraphQL acesse a [documentação](https://graphql.org/learn/) ou entre em contato.
 
 ## Persistência
 
-Para persistir os dados está sendo usado o sqlite que é uma biblioteca desenvolvida em C que implementa um banco de dados SQL, o ORM faz o mapeamento dos dados relacionais para o javascript. Através do sequelize é definido os modelos que viram tabelas no banco e através de métodos javascript é possível  realizar as operações de CRUD, o ORM é um facilitador para criar e manipular os dados no banco.
+Na camada de repositório, esta aplicação utiliza algum banco de dados relacional e sua comunicação é dada por intermédio do Sequelize. Sequelize é um ORM, para javascript, com objetivo de comunicar e fazer o mapeamento entre sua aplicação e o banco de dados relacional. É necessário a implementação de interfaces/modelos para entidades, cujo objetivo é poder acessar programaticamente as suas respectivas tabelas no banco de dados.  
+Exemplo:  
 
-## Autenticação
+Definindo a interface de pessoa:
+```
+export interface Pessoa extends Model {
+  readonly id: Number;
+  readonly dni: Number;
+}
+```
+Definindo como o sequelize deverá mapear o modelo Pessoa no banco de dados:
+```
+atributos = {
+  dni: {
+    allowNull: false,
+    type: new DataTypes.STRING(64),
+    unique: true,
+  },
+  id: {
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataTypes.BIGINT,
+  },
+  ...
+}
+```
 
-No sistema de autenticação estamos utilizando token jwt, juntamente com passport, que este é um middleware que tem como objetivo identificar se há token na requisição e recuperar a informação proveniente do token e colocar esta informação na requisição. No nosso sistema a informação do DNI e a senha de pessoa é utilizada para gerar o token. A geração do token consiste em verificar se uma pessoa no sistema possui o DNI requisitado e caso está pessoa exista no sistema, é checado as senhas e caso esta última verificação seja válida, um token é gerado com aquele DNI como resposta.
+Declarando ao sequelize os atributos:
+```
+const pessoa = sequelize.define('Pessoa', atributos);
+```
+Para criar nova pessoa no banco de dados:
+```
+pessoa.create({ dni: 1, ... });
+```
 
+Para mais informações sobre o sequelize acesse a [documentação](https://sequelize.org/master/).
+
+## Autenticação/Autorização
+
+No sistema de autenticação estamos utilizando token jwt, juntamente com passport, que este é um middleware que tem como objetivo identificar se há token na requisição e recuperar a informação proveniente do token e colocar esta informação na requisição.  
+
+No sistema a informação do DNI e a senha de pessoa é utilizada para gerar o token, quando a query createToken(dni, password) é realizada. A geração do token consiste em verificar se uma pessoa no sistema possui o DNI requisitado e caso está pessoa exista no sistema, é checado as senhas e caso esta última verificação seja válida, um token é gerado com aquele DNI como resposta.
+
+Para identificar se uma query foi realizada autenticada, há um middleware do passport, na rota responsável pelo graphql, que é responsável por extrair o token do header da requisição e em seguida aplicar a estragégia definida para manipular o token. Caso o token seja válido para estratégia definida, a informação do token será incrementada na requisição.  
+
+Como o graphql tem acesso a informação do token para realizar autorização? A informação que é incrementada pelo passport a requisição é recebida pelo apollo e repassada para o resolvers através do contexto. Desta forma, como o resolver tem acesso ao contexto, ele pode utilizar esta informação para decidir realizar a lógica de autorização. Para facilitar a manutenção , legibilidade e versatilidade da aplicação, foi criado uma composição de resolver, que pode receber um resolver de autorização. Este resolver é denomido de `authResolver`.
+
+## Licensa
+MIT
