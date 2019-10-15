@@ -100,5 +100,15 @@ Para identificar se uma query foi realizada autenticada, há um middleware do pa
 
 Como o graphql tem acesso a informação do token para realizar autorização? A informação que é incrementada pelo passport a requisição é recebida pelo apollo e repassada para o resolvers através do contexto. Desta forma, como o resolver tem acesso ao contexto, ele pode utilizar esta informação para decidir realizar a lógica de autorização. Para facilitar a manutenção , legibilidade e versatilidade da aplicação, foi criado uma composição de resolver, que pode receber um resolver de autorização. Este resolver é denomido de `authResolver`.
 
+## Desempenho
+
+Em Construção
+
+## Como contribuir?
+
+Sinta-se avontade em criar issues e/ou marcá-las para resolvê-las.  
+
+Informações adicionais de como contribuir: em construção.
+
 ## Licensa
 MIT
