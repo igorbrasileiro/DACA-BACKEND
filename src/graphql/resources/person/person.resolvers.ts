@@ -1,6 +1,6 @@
 import { Transaction } from 'sequelize/types';
 import { hashSync } from 'bcryptjs';
-import { SALT } from '../../../middleware/auth';
+import ENV from '../../../config/environment';
 import { compose } from '../../composable/composable.resolver';
 import { authResolvers } from '../../composable/auth.resolver';
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
@@ -15,7 +15,7 @@ export const resolvers = {
         }
 
         input.state = state.id;
-        input.password = hashSync(input.password, SALT);
+        input.password = hashSync(input.password, Number(ENV.SALT_FACTOR));
 
         return db.Person.create(input, { transaction: t });
       });

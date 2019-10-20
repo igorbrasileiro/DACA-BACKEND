@@ -9,7 +9,7 @@ export const params = {
   secretOrKey: ENV.SECRET_KEY, // process.env.SECRET_KEY
 };
 
-const SALT_FACTOR = ENV.SALT_FACTOR; // process.env.SALT_FACTOR
+const SALT_FACTOR = Number(ENV.SALT_FACTOR); // process.env.SALT_FACTOR
 export const SALT = genSaltSync(SALT_FACTOR);
 
 export const getToken = async (dni: string, password: string,  db: DbConnection) => {
