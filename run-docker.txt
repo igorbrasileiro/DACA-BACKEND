@@ -1,0 +1,23 @@
+# Start minikube
+minikube start
+
+# Set docker env
+eval $(minikube docker-env)
+
+# Build image
+docker build -t foo:0.0.1 .
+
+# Run in minikube
+kubectl run hello-foo --image=foo:0.0.1 --image-pull-policy=Never
+
+# Check that it's running
+kubectl get pods
+
+https://kubernetes.io/docs/setup/learning-environment/minikube/#use-local-images-by-re-using-the-docker-daemon
+
+Note: Be sure to tag your Docker image with something other than latest and use that tag to pull the image. Because :latest is the default value, with a corresponding default image pull policy of Always, an image pull error (ErrImagePull) eventually results if you do not have the Docker image in the default Docker registry (usually DockerHub).
+
+
+# expose pod
+kubectl expose pod <pod_name> --type="NodePort" --port=<docker_port>(ex:4000) --name=daca-service
+
