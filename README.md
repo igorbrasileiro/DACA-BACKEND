@@ -106,7 +106,17 @@ A arquitetura de microsserviços provém maior escalabilidade, visto que os serv
 Não conseguimos concluir a ideia microsserviços.
 
 ### Kubernetes
-A escolha do kubernetes foi decorrente da escolha de microsserviços, porque no kubernetes pelo fato de ser uma ferramenta de automatização de deploy, que permite escalabilidade horizontal simples utilizando containers.
+A escolha do kubernetes foi decorrente da escolha de microsserviços, porque no kubernetes pelo fato de ser uma ferramenta de automatização de deploy, que permite escalabilidade horizontal simples utilizando containers.  
+
+Utilizando o minikube para executar, segue os passos:  
+$ minikube start  
+$ eval $(minikube docker-env)  
+$ cd <diretorio que possui o dockerfile>  
+$ docker build -t daca:v1 .  
+$ kubectl run daca --image=daca  
+$ minikube ip (copiar o endereço)  
+$ kubectl get services (pegar a porta de entrada do kubernetes)  
+o endereço acessivel será o ip-do-minikube:porta-do-kubernetes/graphql  
 
 
 ## Desempenho
