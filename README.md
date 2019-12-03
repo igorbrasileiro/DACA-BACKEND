@@ -100,6 +100,15 @@ Para identificar se uma query foi realizada autenticada, há um middleware do pa
 
 Como o graphql tem acesso a informação do token para realizar autorização? A informação que é incrementada pelo passport a requisição é recebida pelo apollo e repassada para o resolvers através do contexto. Desta forma, como o resolver tem acesso ao contexto, ele pode utilizar esta informação para decidir realizar a lógica de autorização. Para facilitar a manutenção , legibilidade e versatilidade da aplicação, foi criado uma composição de resolver, que pode receber um resolver de autorização. Este resolver é denomido de `authResolver`.
 
+## Escolha das tecnologias
+### Micro-serviços (microsservices)
+A arquitetura de microsserviços provém maior escalabilidade, visto que os serviços independentes podem crescer de forma autônoma, dado que os serviços são independentes de estado(stateless). Outro motivo secundário foi o interesse pessoal de aprender sobre a arquitetura microsserviços. Inicialmente a ideia seria separar um serviço de autenticação, um serviço de criação de usuários e um outro serviço responsável por criar deputados e leis.  
+Não conseguimos concluir a ideia microsserviços.
+
+### Kubernetes
+A escolha do kubernetes foi decorrente da escolha de microsserviços, porque no kubernetes pelo fato de ser uma ferramenta de automatização de deploy, que permite escalabilidade horizontal simples utilizando containers.
+
+
 ## Desempenho
 
 Em Construção
