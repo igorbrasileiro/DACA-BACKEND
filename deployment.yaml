@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daca-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: daca-deployment
+  template:
+    metadata:
+      labels:
+        run: daca-deployment
+    spec:
+      containers:
+      - name: daca-v1
+        image: daca:v1
+  

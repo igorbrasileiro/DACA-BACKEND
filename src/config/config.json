@@ -1,17 +1,10 @@
 {
   "development": {
-    "storage": "daca.database.sqlite",
-    "dialect": "sqlite"
-  },
-  "test": {
-    "storage": "daca.database.sqlite",
-    "dialect": "sqlite"
-  },
-  "production": {
     "username": "root",
-    "password": "123",
-    "database": "daca_production",
-    "host": "127.0.0.1",
-    "dialect": "sqlite"
+    "password": null,
+    "database": "develop",
+    "host": "192.168.99.104",
+    "port": "30098",
+    "dialect": "mysql"
   }
 }
