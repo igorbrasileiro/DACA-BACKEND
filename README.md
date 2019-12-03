@@ -114,6 +114,8 @@ $ eval $(minikube docker-env)
 $ cd <diretorio que possui o dockerfile>  
 $ docker build -t daca:v1 .  
 $ kubectl run daca --image=daca  
+$ kubectl get pods    
+$ kubectl expose pod <nome_do_pod> --type="NodePort" --port=4000  
 $ minikube ip (copiar o endereço)  
 $ kubectl get services (pegar a porta de entrada do kubernetes)  
 o endereço acessivel será o ip-do-minikube:porta-do-kubernetes/graphql  
