@@ -1,3 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: daca-service
+spec:
+  type: NodePort
+  ports:
+  - port: 4000
+  selector:
+    run: daca-deployment
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
