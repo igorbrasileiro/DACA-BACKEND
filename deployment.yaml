@@ -14,7 +14,7 @@ kind: Deployment
 metadata:
   name: daca-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       run: daca-deployment
