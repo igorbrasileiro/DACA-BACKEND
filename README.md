@@ -108,17 +108,17 @@ Não conseguimos concluir a ideia microsserviços.
 ### Kubernetes
 A escolha do kubernetes foi decorrente da escolha de microsserviços, porque no kubernetes pelo fato de ser uma ferramenta de automatização de deploy, que permite escalabilidade horizontal simples utilizando containers.  
 
+Esta configuração possui um pod executando o banco de dados com mysql e outros 2 pods com o backend.
+
 Utilizando o minikube para executar, segue os passos:  
 $ minikube start  
 $ eval $(minikube docker-env)  
 $ cd <diretorio que possui o dockerfile>  
+$ kubectl apply -f mysql-deployment.yaml  
+(observer o endereço de ip do deployment do mysql e colocar no arquivo `src/config/config.json`, para isso pode usar `$ minikube service mysql-service`)
 $ docker build -t daca:v1 .  
-$ kubectl run daca --image=daca  
-$ kubectl get pods    
-$ kubectl expose pod <nome_do_pod> --type="NodePort" --port=4000  
-$ minikube ip (copiar o endereço)  
-$ kubectl get services (pegar a porta de entrada do kubernetes)  
-o endereço acessivel será o ip-do-minikube:porta-do-kubernetes/graphql  
+$ kubectl apply -f deployment.yaml  
+$ minikube service daca-service (lembrar de adicionar no /graphql ao fim do endereço)
 
 
 ## Desempenho
