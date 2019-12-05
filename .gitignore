@@ -61,3 +61,5 @@ typings/
 .next
 
 dist
+memory
+daca.database.sqlite
