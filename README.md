@@ -4,6 +4,8 @@
 ## Descrição
 API GraphQL para um sistema que permite usuários acompanhar o processo de tramitação da criação de Leis. Para mais informações acesse [E-Camara Organizadora](https://docs.google.com/document/d/e/2PACX-1vRMP1dmmr6DpXQECabYiR_pboa4P_XiXEywRX_wntWL0ego4KHlH25_Vsv0HB0_Io4nXn4lNI0eEaXU/pub)
 
+Minha primeira aplicação utilzando (ou tentando) micro serviços, docker, kubernetes
+
   
 ## Iniciando
 ### Pre requisitos
